@@ -14,7 +14,14 @@
 	function validate(){
 		var obj = document.getElementById("name");
 		if(obj.value==""){
-			alert("房间名不能为空,请输入房间名。");
+			alert("苟呆温馨提示：房间名不能为空,请输入房间名。");
+			obj.focus();
+			return false;
+		}
+		var re =/[`~!@#$%^&*_+<>{}\/'[\]]/im;
+		if (re.test(obj.value)){
+			alert("苟呆温馨提示：房间名中不允许有特殊符号哦");
+			obj.value="";
 			obj.focus();
 			return false;
 		}
@@ -27,7 +34,7 @@
 		}
 		if(xmlhttp!=null){
 			xmlhttp.onreadystatechange=state_change;
-			xmlhttp.open("GET", encodeURI(url) , false);
+			xmlhttp.open("GET", encodeURI(encodeURI(url)) , false);
 			xmlhttp.send();
 		}
 	}
@@ -43,7 +50,7 @@
 					return false;
 				}
 				var url = "index.jsp?name="+obj.value;
-				window.location.href=encodeURI(url);
+				window.location.href=encodeURI(encodeURI(url));
 			}else{
 				alert("Problem retrieving data:" + xmlhttp.statusText);
 			}

@@ -2,6 +2,7 @@ package com.eleven.websocket;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class AjaxServlet extends HttpServlet{
 			resp.setContentType("text/html;charset=utf-8");
 			PrintWriter pw = resp.getWriter();
 			String name = req.getParameter("name");
-			System.out.println(name);
+			name = URLDecoder.decode(name, "UTF-8");
 			Map<String, Integer> onlineCountMap = WebSocket.getInstance().getOnlineCountMap();
 			Set<String> roomSet = onlineCountMap.keySet();
 			if(roomSet.size()>99){

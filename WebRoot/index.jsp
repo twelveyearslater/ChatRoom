@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page language="java" import="java.net.URLDecoder" %>
     <% 
     	request.setCharacterEncoding("utf-8");
     	String name = request.getParameter("name"); 
+    	name = URLDecoder.decode(name, "UTF-8");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +35,8 @@
 	var websocket = null;
 	//判断当前浏览器是否支持WebSocket
 	if('WebSocket' in window){
-		websocket = new WebSocket("ws://localhost:9080/JavaWebSocket/websocket/"+name);
+		//根据实际的情况配置ip及端口
+		websocket = new WebSocket("ws://localhost:8080/JavaWebSocket/websocket/"+name);
 	}else{
 		alert("当前服务器 Not Support WebSocket")
 	};
